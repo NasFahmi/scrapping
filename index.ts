@@ -10,8 +10,8 @@ async function scrapeTokopedia() {
     const page = await browser.newPage();
     // const url = 'https://www.tokopedia.com/search?st=&q=flex%20skincare&srp_component_id=02.01.00.00&srp_page_id=&srp_page_title=&navsource=%27';
     const url = 'https://www.tokopedia.com/';
-    const xlsxName = 'Camera_Sony';
-    const searchQuery = 'Camera Sony';
+    const xlsxName = 'Handphone';
+    const searchQuery = 'Handphone';
     // const url = 'file:///E:/Media/Project/Javascript/scrapping/index.html';
     
     await page.goto(url, { waitUntil: 'networkidle2' });
@@ -36,7 +36,8 @@ async function scrapeTokopedia() {
             const nama_brand = product.querySelector('[class="OWkG6oHwAppMn1hIBsC3pQ=="]')?.textContent?.trim();
             
             // Check for discounted price first
-            let harga = product.querySelector('[class="en+9Xhk5rmGNLiUfSuIuqg=="]')?.textContent?.trim();
+            // ! diskon
+            let harga = product.querySelector('[class="en+9Xhk5rmGNLiUfSuIuqg=="]')?.textContent?.trim(); //div, span ,dll. a. 
             // If no discounted price, get the regular price
             if (!harga) {
                 harga = product.querySelector('[class="_8cR53N0JqdRc+mQCckhS0g== "]')?.textContent?.trim();
@@ -49,8 +50,8 @@ async function scrapeTokopedia() {
             products.push({
                 nama_brand: nama_brand || 'N/A',
                 harga: harga || 'N/A',
-                rating: rating || 'N/A',
-                terjual: terjual || 'N/A',
+                rating: rating || '0.0',
+                terjual: terjual || '0',
                 link: link || 'N/A',
                 toko: toko || 'N/A',
                 gambar: gambar || 'N/A'
